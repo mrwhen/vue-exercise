@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName" /> <br/> <br/>
+        名：<input type="text" v-model="lastName" /> <br/> <br/>
+        姓名：<label>{{fullName}}</label><br/> <br/>
+        姓名：<label>{{fullName}}</label><br/> <br/>
+        姓名：<label>{{fullName2}}</label><br/> <br/>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                firstName: "张",
+                lastName: "三"
+            },
+            methods: {
+                showInfo() {
+                    return this.firstName+"-"+this.lastName
+                }
+            },
+            computed: {
+                fullName: {
+                    // get 什么情况下会被调用
+                    // 1、初次调用的时候
+                    // 2、关联属性发生变化的时候
+                    get: function(){
+                        console.log("调用了我")
+                        return this.firstName + "-" + this.lastName
+                    },
+                    set: function(i){
+                        iArr = i.split("-")
+                        this.firstName = iArr[0]
+                        this.lastName = iArr[1]
+                    }
+                },
+                fullName2: function(){
+                        return this.firstName + "-" + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

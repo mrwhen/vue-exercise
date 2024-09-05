@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>{{name}}</h1>
+        <h1>{{age}}</h1>
+        <button v-on:click="showInfo">点我弹框-完整事件写法</button>
+        <!-- v-on:click 简写成 @click -->
+        <!-- 不传参，第一个参数默认为 event -->
+        <button @click="showInfo">点我弹框-事件简写</button>
+        <!-- 事件方法传参 -->
+        <!-- $event 是关键字 -->
+        <button @click="showInfo1(66, $event)">点我弹框-事件方法传参</button>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: "#root",
+            // data中的数据才会做数据劫持
+            data: {
+                name: 'sean',
+                age: 123,
+            },
+            // methods中的数据不会做数据劫持
+            methods: {
+                showInfo(event) {
+                    // alert('Hello')
+                    console.log(event.target.innerHTML)
+                    console.log(this == vm)
+                },
+                showInfo1(number, event) {  
+                    // alert(number)
+                    console.log(number, event)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

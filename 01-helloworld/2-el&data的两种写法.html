@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>{{name}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+
+        // --------- el的两种写法
+        // new Vue({
+        //     el: "#root", // 第一种写法
+        //     data: {
+        //         name: "Sean"
+        //     }
+        // })
+
+        // const x = new Vue({
+        //     data: {
+        //         name: "Sean"
+        //     }
+        // })
+        // // console.log(x)
+        // // x.$mount("#root")
+
+        // setTimeout(() => {
+        //     x.$mount("#root") // 第二种写法, Vue对象中的$开头的 key 是Vue 使用的，proto 是给实例用的
+        // }, 1000)
+
+
+        // --------- data 的两种写法
+        new Vue({
+            el: "#root",
+            // data: {
+            //     name: "Sean"
+            // }
+
+            // 此处是一个普通函数，Vue 帮忙调用的
+            // data: function(){
+            //     console.log(this) // Vue 实例
+            //     return {
+            //         name: "Sean"
+            //     }
+            // }
+
+            // 箭头函数，注意 this 不再是 Vue 实例
+            // data: ()=>{
+            //     console.log(this) // Window 实例 ，箭头函数没有 this，会向外找，就找到了 window
+            //     return {
+            //         name: "sean"
+            //     }
+            // }
+
+            // Vue 所管理的函数
+            // 此处简写了，data: function() => data()
+            data() {
+                return {
+                    name: "Sean"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

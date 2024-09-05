@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>{{name}} {{age}}</h1>
+        <!-- v-bind:value 简写成 :value -->
+        <!-- 单向数据流绑定 -->
+        <input :value="name" />
+        <!-- v-model:value 简写成 v-model -->
+        <!-- v-model 只能用于表单类元素，即输入类元素，即找 value 值，所以value可以不写 -->
+        <!-- 双向数据绑定 -->
+        <input v-model="name" />
+        <h1 :aa="name">xx</h1>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: "#root",
+            data: {
+                name: "Sean",
+                age: 18
+            }
+        })
+    </script>
+</body>
+</html>

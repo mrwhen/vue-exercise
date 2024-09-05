@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../js/vue.js"></script>
+    <style>
+        * {
+            margin-top: 20px;
+        }
+
+        .box1 {
+            background-color: skyblue;
+            width: 200px;
+            height: 200px;
+        }
+
+        .box2 {
+            background-color: yellow;
+            height: 100px;
+            float: bottom;
+        }
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: peru;
+            overflow: auto;
+        }
+        li {
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1>{{name}}</h1>
+        <button @click="showInfo">点我弹框</button>
+        <!-- 事件修饰符 -->
+        <!-- prevent 阻止事件冒泡 -->
+        <a href="http://www.baidu.com" @click.prevent="showInfo">点我跳转到百度</a>
+        <!-- stop 阻止事件冒泡 -->
+        <div class="demo1" @click="showInfo">
+            <!-- <button @click.stop="showInfo">点我提示信息</button> -->
+            <!-- ！！！小技巧！！！！！ 修饰符可以连写，顺序随意 -->
+            <a href="http://www.baidu.com" @click.prevent.stop="showInfo">点我提示信息</a>
+        </div>
+        <!-- 事件只触发一次 -->
+        <button @click.once="showInfo">点我提示信息</button>
+        <!-- 使用事件的捕获模式 -->
+        <!-- 先捕获事件，再处理事件，捕获时不处理事件 -->
+        <!-- capture 在捕获的时候就处理事件，改变了事件触发的顺序 -->
+        <div @click.capture="showMsg1" class="box1">
+            div1
+            <div @click.capture="showMsg2" class="box2">
+                div2
+            </div>
+        </div>
+        <!-- 只有 event.target 是当前操作的元素时才触发事件 -->
+        <div class="demo1" @click.self="showInfo">
+            <button @click="showInfo">点我提示信息</button>
+        </div>
+        <!-- wheel 滚轮的滚动，不是滚动条 -->
+        <!-- scroll 滚动条的滚动，不是滚动轮 -->
+        <!-- passive 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#root",
+            data: {
+                name: "Sean"
+            },
+            methods: {
+                showInfo(e) {
+                    // 阻止事件默认行为，可以不用主动写这个，可以在 click 上去操作
+                    // e.preventDefault()
+                    // alert("Hello!!")
+                    console.log(e.target)
+                },
+                showMsg1() {
+                    console.log(1)
+                },
+                showMsg2() {
+                    console.log(2)
+                },
+                demo() {
+                    // for (let i = 0; i < 100000; i++) {
+                    //     console.log(i)
+                    // }
+                    console.log('累坏了')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>欢迎</h2>
+        <!-- vue 给常用的按键起了别名 -->
+        <!-- enter,delete, esc,space,tab,up,down,left,right -->
+        <!-- 大写的才是真正的按键名字，小写的是别名，比如 Enter -->
+
+        <!-- 一些特殊的按键 -->
+        <!-- 注意：不是所有键盘按键都能绑定事件，比如音量和背光 -->
+         <!-- 注意：CapsLock  caps-lock 多个单词要用-链接才行 -->
+        <!-- Tab，得用 keyDown事件，在你按下 tab 时已经切走了，所有 keyup 没用 -->
+
+        <!-- 系统修饰键 ctrl alt shift meta，配合 keyUp 使用都有问题 -->
+        <!-- 配合 keyup 使用：按下修饰键的同时，再按下其它的键，随后释放其它的键，事件才会触发 -->
+        <!-- 配合 keydown 使用：正常触发事件 -->
+
+        <!-- 不推荐了 不推荐了 不推荐了 已从 web 标准中移除了 -->
+        <!-- 通过 keyCode 去指定具体的按键，不推荐了 -->
+        <!-- <input type="text" placeholder="按下回车提示输入" @keydown.17="showInfo"> -->
+        <!-- 推荐 推荐 推荐推荐推荐 -->
+        <!-- 通过 key name 去指定具体的按键 -->
+        <!-- <input type="text" placeholder="按下回车提示输入" @keydown.ctrl="showInfo"> -->
+
+        <!-- 按键别名 -->
+        <!-- <input type="text" placeholder="按下回车提示输入" @keydown.huiche="showInfo"> -->
+
+        <!--！！！小技巧！！！！！ ctrl.y 只有按下 ctrl + y 键才可以 -->
+        <input type="text" placeholder="按下回车提示输入" @keydown.ctrl.y="showInfo">
+    </div>
+    <script>
+        // 定义按键别名
+        Vue.config.keyCodes.huiche = 13
+        
+        new Vue({
+            el:"#root",
+            data:{
+
+            },
+            methods: {
+                showInfo(e) {
+                    // if (e.keyCode != 13) return
+                    console.log(e.key)
+                    console.log(e.keyCode)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

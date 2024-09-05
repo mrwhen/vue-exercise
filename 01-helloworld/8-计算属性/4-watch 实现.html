@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName" /> <br/> <br/>
+        名：<input type="text" v-model="lastName" /> <br/> <br/>
+        姓名：<label>{{fullName}}</label><br/> <br/>
+    </div>
+    <script type="text/javascript">
+        // 两个重要的原则
+        // 1、所被 Vue 管理的函数，最好写成普通函数，这样 this 的指向才是 vm 或---组件实例对象---后面会遇到
+        // 2、所有不被 Vue 管理的函数（定时器函数，ajax 的回调函数，promise的回调函数，最好写成箭头函数，这样 this 才是 vm 或者组件实例对象）
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                firstName: "张",
+                lastName: "三",
+                fullName: "张-三"
+            },
+            computed: {
+                
+            },
+            // vs 计算属性对比
+            // watch 没有返回值，支持开启异步任务！！！！！
+            // computed 需要返回值,无法开启异步任务！！！！
+            watch: {
+                firstName(newValue) {
+                    // 定时器函数不受 VUE 管理，是 JS 引擎调用的
+                    // 写成箭头函数，this 就没了，就会往外找，外面的 this 又是 firstName函数的 this，firstName是普通函数，那 this 就是 vm
+                    setTimeout(() => {
+                        console.log(this)
+                        this.fullName = newValue + "-" + this.lastName
+                    },1000)
+                },
+                lastName(newValue) {
+                    this.fullName = this.firstName + "-" + newValue
+                }
+            }
+        })
+    </script>
+</body>
+</html>
