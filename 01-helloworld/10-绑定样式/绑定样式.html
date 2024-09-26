@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .basic{
+            width: 400px;
+            height: 100px;
+            border: 1px solid;
+        }
+
+        .happy{
+            background-color: aqua;
+        }
+
+        .sad{
+            background-color: aquamarine;
+        }
+
+        .normal{
+            background-color: blue;
+        }
+
+        .atguigu1{
+            font-size: 20px;
+        }
+
+        .atguigu2{
+            font-weight: bold;
+        }
+
+        .atguigu3{
+            color: brown;
+        }
+    </style>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 总结  -->
+        <!-- 
+        绑定样式：
+        1、class 样式
+            写法：class="xxx" xxx 可以是字符串，对象，数组 
+        2、style 样式
+            :style="{fontSize: xxx}" xxx 是动态值
+            :style="[a,b]" 其中 a、b是样式对象
+        -->
+
+        <!-- 绑定 class 的方法 -->
+        <!-- :class -->
+        <div class="basic" :class="mood" @click="changeMood">Hello World!!</div>
+        <!-- 数组写法 -->
+        <div class="basic" :class="classArr" @click="changeMood">Hello World!!</div>
+        <!-- 对象写法 -->
+        <div class="basic" :class="classObj" @click="changeMood">Hello World!!</div>
+        <!-- 绑定 style，对象写法 -->
+        <!-- 对象的 key 不能瞎写，只能是 css 中存在的预置 key -->
+        <div class="basic" :style="{fontSize: 30+'px'}">Hello World!!</div>
+        <div class="basic" :style="styleObj">Hello World!!</div>
+        <!-- 绑定 style，数组写法 -->
+        <div class="basic" :style="styleArr">Hello World!11!</div>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        vm = new Vue({
+            el: "#root",
+            data: {
+                mood: "happy",
+                classArr: ['atguigu1','atguigu2','atguigu3'],
+                classObj: {
+                    atguigu1: false,
+                    atguigu2: false,
+                },
+                styleObj: {
+                    fontSize: "30px"
+                },
+                styleArr: [
+                    {
+                        fontSize: "30px",
+                        backgroundColor: "gray"
+                    },
+                    {
+                        backgroundColor: "gray"
+                    }
+                ]
+            },
+            methods: {
+                changeMood() {
+                    const c = ['happy','sad','normal']
+                    const idx = Math.floor(Math.random()*3)
+                    console.log(idx)
+                    this.mood = c[idx]
+                },
+            },
+        })
+    </script>
+</body>
+</html>

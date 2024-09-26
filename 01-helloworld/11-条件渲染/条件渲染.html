@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+    <!-- 条件渲染 -->
+    <!-- 
+        1、v-if
+        写法：
+            v-if="表达式"
+            v-else-if="表达式"
+            v-else="表达式"
+        适用于：切换频率较低的场景
+        特点：不展示 DOM 元素直接被移除
+        注意：v-if 可以和 :v-else-if、v-else一起使用，但要求结构不能被打断
+
+        2、v-show
+        写法：v-show="表达式"
+        适用于：切换频率较高的场景
+        特点：不展示的 DOM 元素未被移除，仅仅是使用样式隐藏掉
+        3、备注：使用 v-if，元素无法获取到，而使用 v-show一定可以获取到
+    -->
+    <div id="body">
+        <!-- v-show -->
+        <!-- <div v-show="a">{{hello}}</div>
+        <div v-show="1===1">{{hello}}</div> -->
+
+        <!-- v-if -->
+        <button @click="n=n+1">点我+{{n}}</button>
+
+        <!-- <div v-show="n === 1">div11</div>
+        <div v-show="n === 2">div22</div>
+        <div v-show="n === 3">div33</div> -->
+
+        <!-- <div v-if="n === 2">div22</div>
+        <div>1212</div>
+        <div v-else-if="n === 1">div11</div>
+        <div v-else-if="n === 3">div33</div> -->
+
+        <!-- template 只能和 v-if配合，template这个层结构渲染的时候是不会存在的 -->
+        <template v-if="n == 1">
+            <div>div11</div>
+            <div>div22</div>
+            <div>div33</div>
+        </template>
+        
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#body",
+            data: {
+                hello: "World",
+                n : 0
+            }
+        })
+        vm.a = true
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="body">
+        <ul>
+            <!-- 数组 -->
+            <li v-for="(item, idx) in list" :key="idx">{{item.name}}-{{idx}}</li>
+        </ul>
+        <ul></ul>
+            <!-- 对象  of 、 in 都可以使用 -->
+            <li v-for="(val, i) of listObj" :key="idx">{{val}}-{{i}}</li>
+        </ul>
+        <ul></ul>
+            <!-- 遍历指定次数 of 、 in 都可以使用 -->
+            <li v-for="(val, i) in 5" :key="idx">{{val}}-{{i}}</li>
+        </ul>
+
+        <ul></ul>
+            <!-- 遍历字符串 of 、 in 都可以使用 -->
+            <li v-for="(val, i) in str" :key="idx">{{val}}-{{i}}</li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#body",
+            data: {
+                list: [
+                    {
+                        name: "sean",
+                        age: 10,
+                        height: 172
+                    },
+                    {
+                        name: "lixu",
+                        age: 12,
+                        height: 180
+                    }
+                ],
+                listObj : {
+                    key1: "val1",
+                    key2: "val2"
+                },
+                str: "sd8ywef"
+            }
+        })
+    </script>
+</body>
+</html>
