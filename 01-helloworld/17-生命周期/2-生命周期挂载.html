@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root" :x="n">
+        <!-- 这里面可以什么都不写，使用 template option 来代替实现 -->
+        <h2>当前 n 值是：{{n}}</h2>
+        <button @click="add">点我 n+1</button>
+        <button @click="bye">点我销毁</button>
+    </div>
+
+    <script>
+        // 1===》
+        const vm = new Vue({
+            // 此处可以不写，vue 不工作，可以自己挂载
+            // el: "#root",
+            // 模板可以使用 template 实现，但是没有一点提示
+            // 注意会替换整个上面的 div 包括 id="root"
+            // template: `
+            //     <div>
+            //     <h2>当前 n 值是：{{n}}</h2>
+            //     <button @click="add">点我 n+1</button>
+            //     </div>
+            //     `,
+            data: {
+                n: 0
+            },
+            methods: {
+                add() {
+                    console.log('add')
+                    this.n++
+                },
+                bye() {
+                    console.log('bye')
+                    // vm 没了，但是 vm 的工作成果还在
+                    // vm 会管理许多其它的组件实例对象
+                    this.$destroy()
+                }
+            },
+            watch:{
+                n() {
+                    console.log(this.n)
+                }
+            },
+            // 2===》初始化生命周期、事件、数据代理还未开始
+            // 3===》看不到_data（数据代理） 看不到 n（数据监测）
+            beforeCreate() { 
+                console.log("beforeCreate")
+                // console.log(this)
+                // debugger // 调试工具
+            },
+            // 4===》初始化数据监测、数据代理
+            // 5===》看到_data（数据代理） 看到 n（数据监测）；真实DOM未渲染
+            created() {
+                console.log("created")
+                // console.log(this)
+                // debugger
+            },
+            // 6===》开始解析模版，生成虚拟 DOM（内存中），页面还不能显示解析好的内容
+                // 6===》有没有 template option？
+                // 没有，
+
+                // 有
+            // 所有对 DOM 的操作最终都不奏效
+            beforeMount() {
+                console.log("beforeMount")
+                // document.getElementById("root").innerHTML = "哈哈" // 对 dom 的修改最终会被虚拟 DOM 覆盖
+                // debugger
+            },
+            // 对 DOM 的操作有效
+            mounted() {
+                console.log("mounted")
+                // 为啥要把真实 DOM 放到 el 中一份，为了比对新旧 DOM，方便复用
+                // console.log(this.$el)
+            },
+            // 页面和数据尚未同步
+            beforeUpdate() {
+                console.log('beforeUpdate')
+                // console.log(this.n)
+                // debugger
+            },
+            updated() {
+                console.log("updated")
+            },
+
+
+            // 注意： 进入以下两个阶段，对数据的修改是不会再经理 update 的阶段了，所以页面不会产生任何变化
+
+            // 此时 vm 中 data、methods、指令都处于可用状态，马上要执行销毁过程
+            // 在此阶段，关闭定时器、取消订阅消息，解绑自定义事件
+            beforeDestroy() {
+                console.log("beforeDestroy")
+                console.log(this.n)
+                // 此时页面不会生效
+                this.add()
+            },
+            // vm没有，子组件从它身上移除掉，移除所有自定义事件
+            destroyed() {
+                console.log("destroyed")
+            },
+        })
+
+        // 自己挂载
+        vm.$mount("#root")
+    </script>
+</body>
+</html>
