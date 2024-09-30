@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>{{msg}}</h2>
+        <!-- <School></School> -->
+        <!-- 三个自标签，只能展示一个，需要脚手架 -->
+        <!-- <School/>
+        <School/>
+        <School/> -->
+        <School1></School1>
+        <!-- <my-school></my-school>
+        <Myschool></Myschool>
+        <MySchool></MySchool> -->
+    </div>
+    <!-- 
+    
+    组件名称写法：
+    1、一个单词写法   
+        - 首字母小些
+        - 首字母大写
+    2、多个单词组成
+        - my-school
+        - MySchool 需要Vue 脚手架支持 
+    备注：不要使用 html 已保留的标签名称 
+    3、多个自标签需要脚手架才能识别
+    4、组件定义的简写
+    
+    
+    -->
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        
+        const school = Vue.extend({
+            name: "xxxx", // VUE 开发者工具看这个名字
+            template: `
+                <div>
+                    <h2>Sean</h2>
+                    <h2>Lee</h2>
+                </div>
+            `,
+            data() {
+                return {
+
+                }
+            }
+        })
+
+        const school1 = {
+            name: "xxxx", // VUE 开发者工具看这个名字
+            template: `
+                <div>
+                    <h2>Sean</h2>
+                    <h2>Lee</h2>
+                </div>
+            `,
+            data() {
+                return {
+
+                }
+            }
+        }
+
+        new Vue({
+            el: "#root",
+            data: {
+                msg: "欢迎学习"
+            },
+            components:{
+                School: school,
+                // "my-school": school,
+                // Myschool: school,
+                // MySchool: school
+                School1: school1
+            }
+        })
+    </script>
+</body>
+</html>

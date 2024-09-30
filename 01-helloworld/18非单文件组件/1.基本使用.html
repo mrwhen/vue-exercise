@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <xuexiao></xuexiao>
+        <xuesheng></xuesheng>
+        <xuesheng></xuesheng>
+    </div>
+
+    <!-- 
+        1、组件的定义
+          - 不要写 el，组件对什么结构起作用，由 vm 来决定
+          - data要使用函数方式编写，不能使用对象，因为组件会被服用，数据应该隔离开
+        2、组件的注册
+        3、组件的使用
+    -->
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        // 创建 school 组件
+        const school = Vue.extend({
+            // el: "#root", 组件定义时，不要写
+            template: `<h2>School 组件, {{name}}</h2>`,
+            data() {
+                // 每次使用都是全新的
+                return {
+                    name: 2
+                }
+            }
+        })
+
+        const student = Vue.extend({
+            // el: "#root", 组件定义时，不要写
+            template: `<h2>Student 组件, {{name}}</h2>`,
+            data() {
+                return {
+                    name: 1
+                }
+            }
+        })
+
+        Vue.component("xuexiao", school)
+        Vue.component("xuesheng", student)
+
+        new Vue({
+            el: "#root",
+            // components: {
+            //     // xuexiao: school,
+            //     // xuesheng: student
+            // },
+            data: {
+                
+            }
+        })
+    </script>
+</body>
+</html>

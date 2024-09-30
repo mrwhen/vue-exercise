@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+    </div>
+    <!--
+    
+    
+    -->
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        
+        const student = {
+            name: "xxxx", // VUE 开发者工具看这个名字
+            template: `
+                <div>
+                    <h2>Student</h2>
+                </div>
+            `,
+            data() {
+                return {
+
+                }
+            }
+        }
+
+        const school = Vue.extend({
+            template: `
+                <div>
+                    <student></student>
+                </div>
+            `,
+            data() {
+                return {
+
+                }
+            },
+            components: {
+                student: student
+            }
+        })
+
+        const hello = Vue.extend({
+            template: `
+                <div>
+                    <h2>HAHHAHA</h2>
+                </div>
+            `,
+            data() {
+                return {
+
+                }
+            },
+            components: {
+                student: student
+            }
+        })
+
+        const app = Vue.extend({
+            template: `
+            <div>
+               <hello></hello>
+               <school></school>
+            </div>
+            `,
+            data() {
+                return {
+
+                }
+            },
+            components: {
+                school,
+                hello
+            }
+        })
+        
+
+        new Vue({
+            el: "#root",
+            template: `<app></app>`,
+            data: {
+                msg: "欢迎学习"
+            },
+            components:{
+                app: app
+            }
+        })
+    </script>
+</body>
+</html>
