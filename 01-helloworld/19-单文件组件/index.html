@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+vue.js 与 vue.runtime.xxx.js 区别
+1、vue.js 是完整版的 Vue，包含核心功能+模版解析器
+2、.vue.runtime.xxx.js 运行版的 Vue，只包含：核心功能，没有模版解析器
+
+因为 vue.runtime.xxx.js 没有模板解析器，
+所以不能使用 template 配置想，
+需要使用render函数接收到的 createElement 函数去指定具体内容
+ -->
+<body>
+    <div id="root"></div>
+    <!-- <script src="../../js/vue.js"></script>
+    <script src="./main.js"></script> -->
+</body>
+</html>
